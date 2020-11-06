@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/moment_avatar_2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/bg_image" />
+
+    <TextView
+        android:id="@+id/moment_nick_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="今日落大雨"
+        android:layout_toRightOf="@id/moment_avatar_2"
+        android:textColor="@color/teal_700"
+        android:textSize="@dimen/profile_nick" />
+
+    <TextView
+        android:id="@+id/moment_content_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/moment_nick_2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/moment_avatar_2"
+        android:textColor="@color/black"
+        android:textSize="@dimen/profile_nick" />
+
+
+    <LinearLayout
+        android:id="@+id/moment_images_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/moment_content_2"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/moment_avatar_2"
+        android:orientation="horizontal">
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

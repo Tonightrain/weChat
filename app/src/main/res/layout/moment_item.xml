@@ -30,21 +30,33 @@
         android:textColor="@color/black"
         android:textSize="@dimen/profile_nick" />
 
-    <GridView
+
+    <LinearLayout
         android:id="@+id/moment_images"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/moment_content"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/moment_avatar"
-        android:numColumns="3" />
+        android:orientation="horizontal" >
 
-   <GridView
-       android:id="@+id/moment_comments"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:verticalSpacing="-20dp"
-       android:layout_below="@+id/moment_images"
-       android:layout_toRightOf="@+id/moment_avatar"/>
+    </LinearLayout>
+
+<!--    <GridView-->
+<!--        android:id="@+id/moment_images"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/moment_content"-->
+<!--        android:layout_toRightOf="@+id/moment_avatar"-->
+<!--        android:numColumns="3" />-->
+
+<!--   <GridView-->
+<!--       android:id="@+id/moment_comments"-->
+<!--       android:layout_width="match_parent"-->
+<!--       android:layout_height="wrap_content"-->
+<!--       android:verticalSpacing="-20dp"-->
+<!--       android:layout_below="@+id/moment_images"-->
+<!--       android:layout_toRightOf="@+id/moment_avatar"/>-->
 
 <!--    <TextView-->
 <!--        android:id="@+id/moment_comment_nick"-->

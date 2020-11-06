@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         profileAvatar = findViewById(R.id.profile_avatar)
         profileNick = findViewById(R.id.profile_nick)
 
+        //个人资料数据处理
         profileService.getProfileData().enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
                 val profileData = response.body()
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("profile", "${profileData?.image}")
 
                 loadPicture(profileData?.avatar, profileAvatar)
+                loadPicture(profileData?.image,profileImage)
                 profileNick.text = profileData?.nick
             }
 
@@ -62,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        //朋友圈内容数据处理
         momentsService = ServiceCreator.create(MomentsService::class.java)
         momentsService.getMomentsData().enqueue(object : Callback<ArrayList<Moment>> {
             override fun onResponse(
@@ -82,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                 val adapterMoment = MomentsAdapter(momentsAfterFilter)
                 momentsView.adapter = adapterMoment
                 momentsView.layoutManager = LinearLayoutManager(MyApplication.context)
+
             }
             override fun onFailure(call: Call<ArrayList<Moment>>, t: Throwable) {
                 Toast.makeText(this@MainActivity, momentsDataError, Toast.LENGTH_SHORT)
@@ -111,6 +115,8 @@ class MainActivity : AppCompatActivity() {
     fun loadPicture(url: String?, view: ImageView) {
         Glide.with(view.context).load(url).into(view)
     }
+
+
 }
 
 
