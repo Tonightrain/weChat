@@ -1,6 +1,5 @@
 package com.example.weChat.model
 
-import java.lang.Error
 
 class Moment(
     var content: String?,
@@ -8,6 +7,7 @@ class Moment(
     var sender: Sender?,
     var comments: Array<Comment>?,
     var error: String?,
+    val unknownError: String?
 ) {
 
     companion object {
@@ -26,7 +26,7 @@ class Moment(
             )
             val comment = Comment("nice!", sender)
             val comments: Array<Comment> = arrayOf(comment, comment)
-            val moment = Moment("内容是今日落大雨", images, sender, comments, null)
+            val moment = Moment("内容是今日落大雨", images, sender, comments, null,null)
             for (i in 1..num) {
                 moments.add(moment)
             }

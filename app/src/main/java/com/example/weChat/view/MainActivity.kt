@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -19,6 +21,8 @@ import com.example.weChat.service.MomentsService
 import com.example.weChat.service.ProfileService
 import com.example.weChat.service.ServiceCreator
 import com.example.weChat.util.MyApplication
+import com.example.weChat.viewModel.WeChatViewModel
+import com.example.weChat.viewModel.WeChatViewModelFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,28 +30,24 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var profileService: ProfileService
     private lateinit var profileImage: ImageView
     private lateinit var profileAvatar: ImageView
     private lateinit var profileNick: TextView
-    private val profileDataError = "load profile data error occurred"
-    private val momentsDataError = "load moments data error occurred"
-    private lateinit var moments: ArrayList<Moment>
-    private lateinit var momentsAfterFilter: List<Moment>
-    private lateinit var momentsService: MomentsService
-    private lateinit var gridView: GridView
+
+    private lateinit var weChatViewModel: WeChatViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        profileService = ServiceCreator.create(ProfileService::class.java)
         profileImage = findViewById(R.id.profile_image)
         profileAvatar = findViewById(R.id.profile_avatar)
         profileNick = findViewById(R.id.profile_nick)
 
-        loadProfileData()
-        loadMomentsData()
+        weChatViewModel = ViewModelProvider(this, WeChatViewModelFactory()).get(WeChatViewModel::class.java)
+
+        setProfileData()
+        setMomentsData()
 
         //朋友圈列表recyclerView
 //        moments = Moment.initData(10)
@@ -66,55 +66,27 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun loadPicture(url: String?, view: ImageView) {
+    private fun loadPicture(url: String?, view: ImageView) {
         Glide.with(view.context).load(url).into(view)
     }
 
-    private fun loadProfileData() {
-        profileService.getProfileData().enqueue(object : Callback<Profile> {
-            override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
-                val profileData = response.body()
-
-                loadPicture(profileData?.avatar, profileAvatar)
-                loadPicture(profileData?.image, profileImage)
-                profileNick.text = profileData?.nick
-            }
-
-            override fun onFailure(call: Call<Profile>, t: Throwable) {
-                Toast.makeText(this@MainActivity, profileDataError, Toast.LENGTH_SHORT)
-                    .show()
-            }
+    private fun setProfileData() {
+        weChatViewModel.loadProfileData()
+        weChatViewModel.profileData.observe(this, { profileData ->
+            loadPicture(profileData?.avatar, profileAvatar)
+            loadPicture(profileData?.image, profileImage)
+            profileNick.text = profileData?.nick
         })
     }
 
-    private fun loadMomentsData() {
-        momentsService = ServiceCreator.create(MomentsService::class.java)
-        momentsService.getMomentsData().enqueue(object : Callback<ArrayList<Moment>> {
-            override fun onResponse(
-                call: Call<ArrayList<Moment>>,
-                response: Response<ArrayList<Moment>>
-            ) {
-                moments = response.body()!!
+    private fun setMomentsData() {
+        weChatViewModel.loadMomentsData()
+        weChatViewModel.momentsData.observe(this, { momentsData ->
 
-                momentsAfterFilter = moments.filter {
-                    it.error == null
-                }
-
-                momentsAfterFilter.forEach {
-                    Log.d("moment", "${it.content}")
-                }
-
-                val momentsView = findViewById<View>(R.id.moments) as RecyclerView
-                val adapterMoment = MomentsAdapter(momentsAfterFilter)
-                momentsView.adapter = adapterMoment
-                momentsView.layoutManager = LinearLayoutManager(MyApplication.context)
-
-            }
-
-            override fun onFailure(call: Call<ArrayList<Moment>>, t: Throwable) {
-                Toast.makeText(this@MainActivity, momentsDataError, Toast.LENGTH_SHORT)
-                    .show()
-            }
+            val momentsView = findViewById<View>(R.id.moments) as RecyclerView
+            val adapterMoment = MomentsAdapter(momentsData)
+            momentsView.adapter = adapterMoment
+            momentsView.layoutManager = LinearLayoutManager(MyApplication.context)
         })
     }
 
