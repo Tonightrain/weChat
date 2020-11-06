@@ -46,15 +46,37 @@ class MainActivity : AppCompatActivity() {
         profileAvatar = findViewById(R.id.profile_avatar)
         profileNick = findViewById(R.id.profile_nick)
 
-        //个人资料数据处理
+        loadProfileData()
+        loadMomentsData()
+
+        //朋友圈列表recyclerView
+//        moments = Moment.initData(10)
+//        val momentsView = findViewById<View>(R.id.moments) as RecyclerView
+//        val adapterMoment = MomentsAdapter(moments)
+//        momentsView.adapter = adapterMoment
+//        momentsView.layoutManager = LinearLayoutManager(this)
+
+        //单条朋友圈
+//        moments.forEach { moment ->
+//            Log.d("images", "${moment.images.size} ")
+//            gridView = findViewById(R.id.moment_images)
+//            val mainAdapter = ImageGridViewAdapter(this@MainActivity,  moment.images)
+//            gridView.adapter = mainAdapter
+//        }
+
+    }
+
+    fun loadPicture(url: String?, view: ImageView) {
+        Glide.with(view.context).load(url).into(view)
+    }
+
+    private fun loadProfileData() {
         profileService.getProfileData().enqueue(object : Callback<Profile> {
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
                 val profileData = response.body()
 
-                Log.d("profile", "${profileData?.image}")
-
                 loadPicture(profileData?.avatar, profileAvatar)
-                loadPicture(profileData?.image,profileImage)
+                loadPicture(profileData?.image, profileImage)
                 profileNick.text = profileData?.nick
             }
 
@@ -63,8 +85,9 @@ class MainActivity : AppCompatActivity() {
                     .show()
             }
         })
+    }
 
-        //朋友圈内容数据处理
+    private fun loadMomentsData() {
         momentsService = ServiceCreator.create(MomentsService::class.java)
         momentsService.getMomentsData().enqueue(object : Callback<ArrayList<Moment>> {
             override fun onResponse(
@@ -87,35 +110,13 @@ class MainActivity : AppCompatActivity() {
                 momentsView.layoutManager = LinearLayoutManager(MyApplication.context)
 
             }
+
             override fun onFailure(call: Call<ArrayList<Moment>>, t: Throwable) {
                 Toast.makeText(this@MainActivity, momentsDataError, Toast.LENGTH_SHORT)
                     .show()
             }
         })
-
-
-        //朋友圈列表recyclerView
-//        moments = Moment.initData(10)
-//        val momentsView = findViewById<View>(R.id.moments) as RecyclerView
-//        val adapterMoment = MomentsAdapter(moments)
-//        momentsView.adapter = adapterMoment
-//        momentsView.layoutManager = LinearLayoutManager(this)
-
-
-        //单条朋友圈
-//        moments.forEach { moment ->
-//            Log.d("images", "${moment.images.size} ")
-//            gridView = findViewById(R.id.moment_images)
-//            val mainAdapter = ImageGridViewAdapter(this@MainActivity,  moment.images)
-//            gridView.adapter = mainAdapter
-//        }
-
     }
-
-    fun loadPicture(url: String?, view: ImageView) {
-        Glide.with(view.context).load(url).into(view)
-    }
-
 
 }
 
