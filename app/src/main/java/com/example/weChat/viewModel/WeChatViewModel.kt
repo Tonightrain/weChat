@@ -1,13 +1,11 @@
 package com.example.weChat.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weChat.model.Moment
 import com.example.weChat.model.Profile
 import com.example.weChat.util.MyApplication
-import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

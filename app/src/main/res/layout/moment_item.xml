@@ -3,6 +3,7 @@
     android:id="@+id/moment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/moment_border"
     android:padding="16dp">
 
     <ImageView
@@ -39,8 +40,22 @@
         android:layout_below="@+id/moment_content"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/moment_avatar"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/moment_comments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/moment_images"
+        android:layout_toRightOf="@+id/moment_avatar"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp">
+
+
+    </LinearLayout>
+
 
 </RelativeLayout>
