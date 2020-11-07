@@ -7,5 +7,4 @@ class WeChatViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return WeChatViewModel() as T
     }
-
 }

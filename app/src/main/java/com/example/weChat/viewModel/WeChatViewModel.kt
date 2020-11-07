@@ -1,24 +1,13 @@
 package com.example.weChat.viewModel
 
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.weChat.R
-import com.example.weChat.adapter.MomentsAdapter
 import com.example.weChat.model.Moment
 import com.example.weChat.model.Profile
 import com.example.weChat.util.MyApplication
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Maybe
-import io.reactivex.rxjava3.kotlin.subscribeBy
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,10 +33,6 @@ class WeChatViewModel : ViewModel() {
                 val profileData = response.body()
 
                 _profileData.postValue(profileData)
-
-//                loadPicture(profileData?.avatar, profileAvatar)
-//                loadPicture(profileData?.image, profileImage)
-//                profileNick.text = profileData?.nick
             }
 
             override fun onFailure(call: Call<Profile>, t: Throwable) {
@@ -65,9 +50,10 @@ class WeChatViewModel : ViewModel() {
                 val momentsData = response.body()!!
 
                 val momentsAfterFilter = momentsData.filter {
-                    it.error == null
-                } as ArrayList<Moment>
-                _momentsData.postValue(momentsAfterFilter)
+                    it.error == null && it.unknownError == null
+
+                }
+                _momentsData.postValue(momentsAfterFilter as ArrayList<Moment>?)
             }
 
             override fun onFailure(call: Call<ArrayList<Moment>>, t: Throwable) {

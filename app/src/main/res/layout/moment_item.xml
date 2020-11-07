@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/moment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
@@ -41,45 +42,5 @@
         android:orientation="horizontal" >
 
     </LinearLayout>
-
-<!--    <GridView-->
-<!--        android:id="@+id/moment_images"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/moment_content"-->
-<!--        android:layout_toRightOf="@+id/moment_avatar"-->
-<!--        android:numColumns="3" />-->
-
-<!--   <GridView-->
-<!--       android:id="@+id/moment_comments"-->
-<!--       android:layout_width="match_parent"-->
-<!--       android:layout_height="wrap_content"-->
-<!--       android:verticalSpacing="-20dp"-->
-<!--       android:layout_below="@+id/moment_images"-->
-<!--       android:layout_toRightOf="@+id/moment_avatar"/>-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/moment_comment_nick"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/moment_images"-->
-<!--        android:layout_marginLeft="10dp"-->
-<!--        android:layout_toRightOf="@+id/moment_avatar"-->
-<!--        android:text="吴亦凡"-->
-<!--        android:textColor="@color/teal_700"-->
-<!--        android:textSize="@dimen/profile_nick"-->
-<!--        android:layout_marginTop="10dp"/>-->
-
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/moment_images"-->
-<!--        android:layout_toRightOf="@+id/moment_comment_nick"-->
-<!--        android:text="哈哈哈"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="@dimen/profile_nick"-->
-<!--        android:layout_marginLeft="10dp"-->
-<!--        android:layout_marginTop="10dp"/>-->
-
 
 </RelativeLayout>

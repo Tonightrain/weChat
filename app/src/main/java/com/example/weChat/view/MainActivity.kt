@@ -3,29 +3,22 @@ package com.example.weChat.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.GridView
+import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weChat.R
 import com.example.weChat.adapter.MomentsAdapter
-import com.example.weChat.model.Moment
-import com.example.weChat.model.Profile
-import com.example.weChat.service.MomentsService
-import com.example.weChat.service.ProfileService
-import com.example.weChat.service.ServiceCreator
 import com.example.weChat.util.MyApplication
+import com.example.weChat.util.MyApplication.Companion.context
 import com.example.weChat.viewModel.WeChatViewModel
 import com.example.weChat.viewModel.WeChatViewModelFactory
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.gson.GsonBuilder
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +26,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var profileImage: ImageView
     private lateinit var profileAvatar: ImageView
     private lateinit var profileNick: TextView
+//    private lateinit var imagesLinearLayout: LinearLayout
+//    private lateinit var avatarView: ImageView
+//    private lateinit var nickView: TextView
+//    private lateinit var contentView: TextView
 
     private lateinit var weChatViewModel: WeChatViewModel
 
@@ -43,27 +40,17 @@ class MainActivity : AppCompatActivity() {
         profileImage = findViewById(R.id.profile_image)
         profileAvatar = findViewById(R.id.profile_avatar)
         profileNick = findViewById(R.id.profile_nick)
+//        imagesLinearLayout = findViewById(R.id.moment_images)
 
-        weChatViewModel = ViewModelProvider(this, WeChatViewModelFactory()).get(WeChatViewModel::class.java)
+//        avatarView = findViewById(R.id.moment_avatar)
+//        nickView = findViewById(R.id.moment_nick)
+//        contentView = findViewById(R.id.moment_content)
+
+        weChatViewModel =
+            ViewModelProvider(this, WeChatViewModelFactory()).get(WeChatViewModel::class.java)
 
         setProfileData()
         setMomentsData()
-
-        //朋友圈列表recyclerView
-//        moments = Moment.initData(10)
-//        val momentsView = findViewById<View>(R.id.moments) as RecyclerView
-//        val adapterMoment = MomentsAdapter(moments)
-//        momentsView.adapter = adapterMoment
-//        momentsView.layoutManager = LinearLayoutManager(this)
-
-        //单条朋友圈
-//        moments.forEach { moment ->
-//            Log.d("images", "${moment.images.size} ")
-//            gridView = findViewById(R.id.moment_images)
-//            val mainAdapter = ImageGridViewAdapter(this@MainActivity,  moment.images)
-//            gridView.adapter = mainAdapter
-//        }
-
     }
 
     private fun loadPicture(url: String?, view: ImageView) {
@@ -86,10 +73,51 @@ class MainActivity : AppCompatActivity() {
             val momentsView = findViewById<View>(R.id.moments) as RecyclerView
             val adapterMoment = MomentsAdapter(momentsData)
             momentsView.adapter = adapterMoment
-            momentsView.layoutManager = LinearLayoutManager(MyApplication.context)
+            momentsView.layoutManager = LinearLayoutManager(context)
+
+
+            //动态添加方法
+//            val avatarView: ImageView? = findViewById(R.id.moment_avatar)
+//            val nickView: TextView? = findViewById(R.id.moment_nick)
+//            val contentView: TextView? = findViewById(R.id.moment_content)
+//            val imageLinearLayout: LinearLayout? = findViewById(R.id.moment_images)
+
+//            Log.d("moments1", GsonBuilder().setPrettyPrinting().create().toJson(momentsData))
+//            momentsData.forEach { moment ->
+//
+//                Log.d("momenti", GsonBuilder().setPrettyPrinting().create().toJson(moment))
+//
+//                val avatarView: ImageView? = findViewById(R.id.moment_avatar)
+//                val nickView: TextView? = findViewById(R.id.moment_nick)
+//                val contentView: TextView? = findViewById(R.id.moment_content)
+//
+//                if (nickView != null) {
+//                    nickView.text = moment.sender?.nick
+//                }
+//                if (moment.content != null) {
+//                    if (contentView != null) {
+//                        contentView.text = moment.content
+//                    }
+//                }
+//
+//                if (avatarView != null) {
+//                    Glide.with(this).load(moment.sender?.avatar).into(avatarView)
+//                }
+//
+//                moment.images?.forEach {
+//                    val imageView = ImageView(context)
+//                    imageView.layoutParams = ViewGroup.LayoutParams(300, 300)
+//                    Glide.with(imageView).load(it).into(imageView)
+//                    findViewById<LinearLayout?>(R.id.moment_images)?.addView(imageView)
+////                    imageLinearLayout?.addView(imageView)
+//                }
+//
+//                val view: View = layoutInflater.inflate(R.layout.moment_item, null)
+//                linearLayout.addView(view)
+
+
         })
     }
-
 }
 
 
