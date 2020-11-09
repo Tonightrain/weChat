@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -27,7 +28,6 @@
                     android:layout_height="340dp"
                     android:layout_marginBottom="52dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/bg_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:layout_editor_absoluteX="0dp" />
 
@@ -36,7 +36,6 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="284dp"
-                    android:src="@drawable/bg_image"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.951"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +45,6 @@
                     android:id="@+id/profile_nick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="今日落大雨"
                     android:textColor="@color/white"
                     android:textSize="@dimen/profile_nick"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -63,14 +61,7 @@
                 android:id="@+id/moments"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"/>
-
-            <LinearLayout
-                android:id="@+id/moment_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
-
+                android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
 

@@ -9,8 +9,7 @@
     <ImageView
         android:id="@+id/moment_avatar"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/bg_image" />
+        android:layout_height="50dp" />
 
     <TextView
         android:id="@+id/moment_nick"
@@ -49,10 +48,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/moment_images"
-        android:layout_toRightOf="@+id/moment_avatar"
-        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp">
+        android:layout_toRightOf="@+id/moment_avatar"
+        android:orientation="vertical">
 
 
     </LinearLayout>
