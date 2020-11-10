@@ -5,9 +5,9 @@
     android:layout_height="wrap_content"
     android:background="@color/comment_bg"
     android:orientation="horizontal"
-    android:layout_marginTop="2dp"
-    android:paddingBottom="3dp"
-    android:paddingLeft="5dp">
+    android:layout_marginTop="@dimen/moment_comment_margin_top"
+    android:paddingBottom="@dimen/moment_comment_padding_bottom"
+    android:paddingLeft="@dimen/moment_comment_padding_left">
 
     <TextView
         android:id="@+id/comment_nick"

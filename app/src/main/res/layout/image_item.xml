@@ -5,7 +5,7 @@
 
     <ImageView
         android:id="@+id/moment_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_width="@dimen/moment_image_layout_width"
+        android:layout_height="@dimen/moment_image_layout_height" />
 
 </LinearLayout>

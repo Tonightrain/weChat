@@ -4,18 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/moment_border"
-    android:padding="16dp">
+    android:padding="@dimen/moment_padding">
 
     <ImageView
         android:id="@+id/moment_avatar"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_width="@dimen/moment_image_width"
+        android:layout_height="@dimen/moment_image_height" />
 
     <TextView
         android:id="@+id/moment_nick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/moment_nick_margin_left"
         android:layout_toRightOf="@id/moment_avatar"
         android:textColor="@color/teal_700"
         android:textSize="@dimen/profile_nick" />
@@ -25,8 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/moment_nick"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/moment_content_margin"
+        android:layout_marginTop="@dimen/moment_content_margin"
         android:layout_toRightOf="@+id/moment_avatar"
         android:textColor="@color/black"
         android:textSize="@dimen/profile_nick" />
@@ -37,7 +37,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/moment_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/moment_images_margin_left"
+        android:layout_marginTop="@dimen/moment_images_margin_top"
+        android:layout_toRightOf="@+id/moment_avatar"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/moment_images_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/moment_images"
+        android:layout_marginLeft="@dimen/moment_images_margin_left"
+        android:layout_marginTop="@dimen/moment_images_margin_top"
         android:layout_toRightOf="@+id/moment_avatar"
         android:orientation="horizontal">
 
@@ -47,13 +60,11 @@
         android:id="@+id/moment_comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/moment_images"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/moment_images_2"
+        android:layout_marginLeft="@dimen/moment_comments_margin"
+        android:layout_marginTop="@dimen/moment_comments_margin"
         android:layout_toRightOf="@+id/moment_avatar"
         android:orientation="vertical">
-
-
     </LinearLayout>
 
 
